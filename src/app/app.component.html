@@ -1,12 +1,12 @@
-<div class="form">
-  <div style="text-align:center">
-    <h1>
-      Registration Form
-    </h1>
-  </div>
-  <dynamic-form [fields]="regConfig" (submit)="submit($event)">
-  </dynamic-form>
-  <div class="margin-top">
-    {{ form.value | json }}
-  </div>
-</div>
+<h2>Angular Project</h2>
+<app-show [fields]="formData" (submit)="submit($event)"></app-show>
+<br>
+<!-- <div>{{returnData|json}}</div> -->
+<table mat-table [dataSource]="returnData" class="mat-elevation-z8 demo-table">
+  <ng-container *ngFor="let item of (formData)" [matColumnDef]="item.name">
+    <th mat-header-cell *matHeaderCellDef>{{item.label}}</th>
+    <td mat-cell *matCellDef="let element">{{element[item.name]}}</td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
